@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+<!--显示登录情况-->
+
+<html>
+<head>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div style=" position: absolute;
+             top: 40%;
+             left: 50%;
+             transform: translate(-50%,-50%);width: 25%;">
+        <form method="post" action="@Url.Action("Login")">
+            <div class="form-group" style="display: flex;
+            justify-content: center;">
+                <h3>Login</h3>
+            </div>         
+            <br />
+            <div class="form-floating mb-3" style="width:100%">
+                <input type="text" class="form-control" name="mid" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Account</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" name="pwd" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <br />
+            <div class="form-group" style="display: flex;
+            justify-content: center;">
+                <input type="submit" value=" Sign in " class="btn btn-primary" />
+            </div>            
+        </form>
+        <hr />
+        <div class="form-group" style="display: flex;
+            justify-content: center;">
+            <h4>@ViewBag.Message</h4>
+        </div>
+        
+    </div>
+ 
+</body>
+</html>
+
+

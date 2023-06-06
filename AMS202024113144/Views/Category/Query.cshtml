@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AMS202024113144.Models.Category>
+@{
+    ViewData["Title"] = "资源类别列表";
+}
+<!--margin-top:3-->
+<div class="container mt-3 mb-3">
+    <h1>资源类别列表</h1>
+    <div class="row">
+        <div>
+            <form method="post" action="Query?choice&&keyword">
+                <select class="form-select" name="choice" style="width:25%" aria-label="Default select example">
+                    <option selected value="0">选择你需要的查询</option>
+                    <option value="1">类别代号</option>
+                    <option value="2">资产名称</option>
+                </select>
+                <div class="input-group mb-3" style="width:25%">
+                    <input type="text" style="width:200px" name="keyword" class="form-control" placeholder="请输入关键词" aria-label="请输入关键词" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="submit" style="color:white;background-color:saddlebrown" id="button-addon2">查询</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <hr />
+    <a class="btn" href="/Category/Create" role="button" style="color:white;background-color:saddlebrown">新 增</a>
+    @{
+        if (TempData["Result"] != null)
+        {
+            <span style="color:red">操作结果==> @TempData["Result"]</span>
+        }
+    }
+    <table class="table table-hover">
+        <thead class="table-light">
+            <tr>
+                <td>类别代号</td>
+                <td>资产名称</td>
+                <td>资产说明</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.CategoryId
+                    </td>
+                    <td>
+                        @item.CategoryName
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        <a href="/Category/Edit?id=@item.CategoryId" class="btn btn-sm btn-outline-primary">修改</a>
+                        <a href="/Category/Delete?id=@item.CategoryId" class="btn btn-sm btn-outline-danger"
+                           onclick="return confirm('确定要删  @item.CategoryId - @item.CategoryName 吗?');">删除</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

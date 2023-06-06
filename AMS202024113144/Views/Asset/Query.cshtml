@@ -1,0 +1,93 @@
+﻿@model IEnumerable<AMS202024113144.Models.Asset>
+@{
+    ViewData["Title"] = "资源列表";
+}
+<!--margin-top:3-->
+<div class="container mt-3 mb-3">
+    <h1>资源列表</h1>
+    <div class="row">
+        <div>
+            <form method="post" action="Query?choice&&keyword">
+                <select class="form-select" name="choice" style="width:25%" aria-label="Default select example">
+                    <option selected value="0">选择你需要的查询</option>
+                    <option value="1">资产名称</option>
+                    <option value="2">资产规格</option>
+                    <option value="3">价格</option>
+                    <option value="4">存放位置</option>
+                    <option value="5">资产类别</option>
+                    <option value="6">资产保管人</option>
+                </select>
+                <div class="input-group mb-3" style="width:25%">
+                    <input type="text" style="width:200px" name="keyword" class="form-control" placeholder="请输入关键词" aria-label="请输入关键词" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="submit" style="color:white;background-color:saddlebrown" id="button-addon2">查询</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <hr />
+    <a class="btn" href="/Asset/Create" role="button" style="color:white;background-color:saddlebrown">新 增</a>
+    @{
+        if (TempData["Result"] != null)
+        {
+            <span style="color:red">操作结果==> @TempData["Result"]</span>
+        }
+    }
+    <table class="table table-hover">
+        <thead class="table-light">
+            <tr>
+                <td>编号</td>
+                <td>资产名称</td>
+                <td>资产规格</td>
+                <td>价格</td>
+                <td>购入日期</td>
+                <td>存放位置</td>
+                <td>资产类别</td>
+                <td>资产图片</td>
+                <td>资产保管人</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.AssetId
+                    </td>
+                    <td>
+                        @item.AssetTitle
+                    </td>
+                    <td>
+                        @item.AssetSpecification
+                    </td>
+                    <td>
+                        @item.AssetPrice
+                    </td>
+                    <td>
+                        @item.PurchaseTime
+                    </td>
+                    <td>
+                        @item.Location
+                    </td>
+                    <td>
+                        @item.Category.CategoryName
+                    </td>
+                    <td>
+                        <img src="~/images/@item.ImgName" style="width:50%; height:60px" />
+                    </td>
+                    <td>
+                        @item.MidNavigation.Name
+                    </td>
+                    <td>
+                        <a href="/Asset/Edit?id=@item.AssetId" class="btn btn-sm btn-outline-primary">修改</a>
+                        <a href="/Asset/Delete?id=@item.AssetId" class="btn btn-sm btn-outline-danger"
+                           onclick="return confirm('确定要删  @item.AssetId - @item.AssetTitle 吗?');">删除</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

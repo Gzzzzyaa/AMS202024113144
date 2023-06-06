@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AMS202024113144.Models.Asset>
+@{
+    ViewData["Title"] = "资源管理";
+}
+<!--margin-top:3-->
+<div class="container mt-3 mb-3">
+    <div style="color:black;font-size:30px;text-align:center;">欢迎光临AssetsMgm</div>
+    <br />
+    <hr style="width:100%;text-align:center" />
+
+    <div style="text-align:center;text-align:center;">
+        <a href="/Home/Index?cat=电脑类">电脑类</a>
+        <a href="/Home/Index?cat=网络类">网络类</a>
+        <a href="/Home/Index?cat=空调类">空调类</a>
+        <a href="/Home/Index?cat=教学类">教学类</a>
+        <a href="/Home/Index?cat=娱乐类">娱乐类</a>
+        <a href="/Home/Index">最新</a>
+    </div>
+    <hr style="width:100%;text-align:center;" />
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            int AssetId = item.AssetId;
+            string AssetTitle = item.AssetTitle;
+            string AssetSpecification = item.AssetSpecification;
+            string AssetPrice = item.AssetPrice;
+            string Location = item.Location;
+            DateTime PurchaseTime = item.PurchaseTime;
+
+            <div class="col-12 col-md-3 col-sm-6 mt-3">
+                <div class="img-thumbnail">
+                    <!--圆角边框-->
+                    <img src="~/images/@item.ImgName" style="width:80%; height:250px" /><hr />
+                    <b style="color:saddlebrown">编号：@AssetId</b>
+                    <br /><b>@AssetTitle / @item.Category.CategoryName</b>
+                    <br /><b>购入时间: @PurchaseTime</b>
+                    <br /><b>资产规格: @AssetSpecification</b>
+                    <br /><b>目前位置: @Location</b>
+                    <br /><b>保管人: @item.MidNavigation.Name</b>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+

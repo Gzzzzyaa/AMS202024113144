@@ -1,0 +1,61 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@model AMS202024113144.Models.Member
+@using AMS202024113144.Models
+@inject ManageDbContext _context
+@{
+    ViewData["Title"] = "修改员工";
+    var departments = _context.Departments.ToList();
+}
+
+<div class="container mt-5 mb-5">
+    <h1>修改员工</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Mid" />
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <!--类别-->
+                    <label asp-for="Role" class="control-label"></label>
+                    <select asp-for="Role" class="form-select" style="width:50%" aria-label="Default select example">
+                        <option selected value="0">选择角色</option>
+                        <option value="Admin">管理员</option>
+                        <option value="Member">普通员工</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <!--类别-->
+                    <label asp-for="Did" class="control-label"></label>
+                    <select asp-for="Did" class="form-select" style="width:50%">
+                        @foreach (var item in departments)
+                        {
+                            <option value="@item.Did">@item.Dname</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="提交修改" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
